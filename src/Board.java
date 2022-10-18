@@ -6,7 +6,7 @@ import javax.swing.*;
 public class Board {
     public static void main(String[] args) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         JFrame window = new JFrame();
-        BlankLevel n = new BlankLevel();
+        //BlankLevel n = new BlankLevel();
         //Level1 a = new Level1();
         Level2 b = new Level2();
         //System.out.println(n.gameThread);

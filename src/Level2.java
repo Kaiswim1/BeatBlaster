@@ -126,7 +126,7 @@ public class Level2 extends Level {
         }
         g2.setColor(bgColor);
         g.fillRect(0, 0, width,height);
-        ground.setColor(Color.black);
+        ground.setColor(obstacleOutline);
         ground.drawLine(0, groundVal, width, groundVal);
         //g2.fillRect(playerX, playerY, tileSize, tileSize);
         g2.drawImage(playerIcon, playerX, playerY, null);

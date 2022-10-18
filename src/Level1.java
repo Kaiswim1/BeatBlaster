@@ -102,7 +102,6 @@ public class Level1 extends Level {
     }
 
     BufferedImage playerIcon = ImageIO.read(new File("Level1/shooter 1.png"));
-    BufferedImage enemyIcon = ImageIO.read(new File("Level1/enemy.png"));
     static Clip clip;
 
     static {
