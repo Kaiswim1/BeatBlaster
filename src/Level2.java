@@ -19,12 +19,19 @@ public class Level2 extends Level {
     int iterator = 0;
 
     //Obstacle
-    int red = 255;
-    int green = 0;
-    int blue = 0;
+    int red_oo = 255;
+    int green_oo = 0;
+    int blue_oo = 0;
+
+    int red_bg = 51; //(255/15)
+    int green_bg = 0;
+    int blue_bg = 0;
 
 
-    Color obstacleOutline = new Color(red, green, blue);
+
+
+    Color obstacleOutline = new Color(red_oo, green_oo, blue_oo);
+    Color bgColor = new Color(red_bg, green_bg, blue_bg);
     Integer[] obstacleX = new Integer[maxIter];
     Integer[] obstacleY = new Integer[maxIter];
     Graphics2D[] obstacles = new Graphics2D[maxIter];
@@ -104,17 +111,20 @@ public class Level2 extends Level {
     @Override
     public void paintComponent(Graphics g){
         iterator++;
-        if(iterator % 2 == 0) {
-            green=green+3;
-            if(green>255)green=0;
-            obstacleOutline = new Color(red, green, blue);
-
-        }
         requestFocus(true);
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         Graphics2D ground = (Graphics2D) g;
-        g2.setColor(Color.darkGray);
+        if(iterator % 10 == 0) {
+            green_oo=green_oo+15;
+            green_bg=green_bg+3;
+            if(green_oo>255)green_oo=0;
+            if(green_bg>51)green_bg=0;
+            obstacleOutline = new Color(red_oo, green_oo, blue_oo);
+            bgColor = new Color(red_bg,green_bg,blue_bg);
+
+        }
+        g2.setColor(bgColor);
         g.fillRect(0, 0, width,height);
         ground.setColor(Color.black);
         ground.drawLine(0, groundVal, width, groundVal);
