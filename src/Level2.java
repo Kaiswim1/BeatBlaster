@@ -14,11 +14,17 @@ public class Level2 extends Level {
 
     int tileSize = 32;
 
-
+    BufferedImage enemy = ImageIO.read(new File("Level2/enemy.png"));
 
     int iterator = 0;
 
     //Obstacle
+    int red = 255;
+    int green = 0;
+    int blue = 0;
+
+
+    Color obstacleOutline = new Color(red, green, blue);
     Integer[] obstacleX = new Integer[maxIter];
     Integer[] obstacleY = new Integer[maxIter];
     Graphics2D[] obstacles = new Graphics2D[maxIter];
@@ -89,7 +95,7 @@ public class Level2 extends Level {
     }
 
     BufferedImage playerIcon = ImageIO.read(new File("Level1/shooter 1.png"));
-    BufferedImage enemyIcon = ImageIO.read(new File("Level1/enemy.png"));
+    //BufferedImage enemyIcon = ImageIO.read(new File("Level1/enemy.png"));
 
     int bgPulseAnimation = 5;
     int BGparallax = -518;
@@ -98,6 +104,12 @@ public class Level2 extends Level {
     @Override
     public void paintComponent(Graphics g){
         iterator++;
+        if(iterator % 2 == 0) {
+            green=green+3;
+            if(green>255)green=0;
+            obstacleOutline = new Color(red, green, blue);
+
+        }
         requestFocus(true);
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
@@ -146,6 +158,9 @@ public class Level2 extends Level {
                 obstacles[i].setColor(Color.gray);
                 obstacles[i].fillRect(obstacleX[i], obstacleY[i], tileSize*4, tileSize);
                 obstacles[i].fillRect(obstacleX2[i], obstacleY[i], tileSize*4, tileSize);
+                obstacles[i].setColor(obstacleOutline);
+                obstacles[i].drawRect(obstacleX[i], obstacleY[i], tileSize*4, tileSize);
+                obstacles[i].drawRect(obstacleX2[i], obstacleY[i], tileSize*4, tileSize);
             }
 
                 //enemies[0].fillRect(enemyX[0], 0, 25, 25);
@@ -198,7 +213,7 @@ public class Level2 extends Level {
         for(int i=0; i<15; i++){
             if (enemies[i] != null && !isShot[i] && enemyX[i]!=null && enemyY[i]!=null) {
                 enemies[i].setColor(Color.red);
-                enemies[i].fillRect( enemyX[i], enemyY[i], tileSize, tileSize);
+                enemies[i].drawImage(enemy, enemyX[i], enemyY[i],null);
             }
 
         }
@@ -207,7 +222,7 @@ public class Level2 extends Level {
         }
         if(spawnIterator >= 15) spawnIterator = 0;
 
-
         g2.dispose();
+
     }
 }

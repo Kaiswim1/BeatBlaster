@@ -80,7 +80,6 @@ public class BlankLevel extends Level {
     }
 
     BufferedImage playerIcon = ImageIO.read(new File("Level1/shooter 1.png"));
-    BufferedImage enemyIcon = ImageIO.read(new File("Level1/enemy.png"));
 
     int bgPulseAnimation = 5;
     int BGparallax = -518;
