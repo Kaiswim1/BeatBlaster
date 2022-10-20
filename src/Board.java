@@ -4,11 +4,19 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 public class Board {
+
+    /**
+     * Each level is represented as its own unique object that inherets from the abstract level class.
+     * @param args
+     * @throws IOException
+     * @throws UnsupportedAudioFileException
+     * @throws LineUnavailableException
+     */
     public static void main(String[] args) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         JFrame window = new JFrame();
-        //BlankLevel n = new BlankLevel();
+        BlankLevel n = new BlankLevel();
         //Level1 a = new Level1();
-        Level2 b = new Level2();
+        //Level2 b = new Level2();
         //System.out.println(n.gameThread);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setBounds(0, 0, 1000, 750);
@@ -16,7 +24,7 @@ public class Board {
         window.setResizable(false);
         //window.setForeground(Color.DARK_GRAY);
         window.setTitle("BEAT BLAST");
-        window.add(b);
+        window.add(n);
         window.pack();
 
     }

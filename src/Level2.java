@@ -26,15 +26,21 @@ public class Level2 extends Level {
     int red_bg = 51; //(255/15)
     int green_bg = 0;
     int blue_bg = 0;
+    int opacity = 5;
 
 
 
 
     Color obstacleOutline = new Color(red_oo, green_oo, blue_oo);
     Color bgColor = new Color(red_bg, green_bg, blue_bg);
+
+    Color parallaxColor = new Color(red_oo, green_oo, green_oo, opacity);
     Integer[] obstacleX = new Integer[maxIter];
     Integer[] obstacleY = new Integer[maxIter];
     Graphics2D[] obstacles = new Graphics2D[maxIter];
+    Graphics2D[] squareParallaxFront = new Graphics2D[maxIter];
+    Graphics2D[] squareParallaxMid = new Graphics2D[maxIter];
+    Graphics2D[] squareParallaxRear = new Graphics2D[maxIter];
     int obstacleSpeed = enemySpeed/2;
     int scoreTracker = 0;
 
@@ -53,6 +59,7 @@ public class Level2 extends Level {
         gameThread = new Thread(this);
         gameThread.start();
         spawnDelay = 450;
+        //squareParallaxFront[0]
     }
 
     @Override
@@ -121,6 +128,7 @@ public class Level2 extends Level {
             if(green_oo>255)green_oo=0;
             if(green_bg>51)green_bg=0;
             obstacleOutline = new Color(red_oo, green_oo, blue_oo);
+            parallaxColor = new Color(red_oo, green_oo, blue_oo, opacity);
             bgColor = new Color(red_bg,green_bg,blue_bg);
 
         }
@@ -131,7 +139,7 @@ public class Level2 extends Level {
         //g2.fillRect(playerX, playerY, tileSize, tileSize);
         g2.drawImage(playerIcon, playerX, playerY, null);
         for(int i=0; i<enemies.length; i++) {//Because enemies.length is the largest iteration
-            if(enemyY[i] != null && enemyX[i]!=null && enemyY[i] >= groundVal - 32){
+              if(enemyY[i] != null && enemyX[i]!=null && enemyY[i] >= groundVal - 32){
                 gameThread = null;
                 System.out.println("terminated");
                 return;
