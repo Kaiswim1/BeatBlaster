@@ -33,7 +33,7 @@ import java.util.Random;
 public class BlankLevel extends Level {
 
     BufferedImage playerIcon = ImageIO.read(new File("Level1/shooter 1.png"));
-    //int tileSize = 16;
+    int tileSize = 12;
 
 
     public BlankLevel() throws IOException {
@@ -80,7 +80,7 @@ public class BlankLevel extends Level {
         if(keyHandler.space){
             spacePressed=true;
             blastY[keyHandler.blastCount] = playerY;
-            blastX[keyHandler.blastCount] = playerX+(tileSize/2);
+            blastX[keyHandler.blastCount] = playerX+15;
             keyHandler.blastCount++;
             keyHandler.space = false;
         }
