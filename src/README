@@ -1,0 +1,24 @@
+/**Each frame takes 4 milliseconds, to prevent lag there is a limit on how many graphical items of one type can be.
+ *For example, at any given time there can be up to (maxIter) enemies, and blasts in the game at one time.
+ * Every time the frame updates, it repaints everything.
+ * Since there is almost always more than one blast and enemy on the screen at any given time, they are represented in arrays.
+ * I.e. blasts[] and enemies[]
+ *
+ * How this game handles collision detection:
+ * With graphics that require collision detection, they also contain arrays of every x and y coordinate of the corresponding graphics. I.e.
+ * enemies have the corresponding enemyX[] and enemy[] to keep track of their position.
+ * In order to detect that you shot an enemy, the game compares every blastX[] and blastY[] element with every enemyX[] and enemyY[] every frame
+ * and checks if any blast has collided with any enemy.
+ *
+ * (Time complexity)
+ * The blasts[], and enemies[] both have a length of (maxIter). Each blast compares its position to every single enemy each frame, thus providing an
+ * O(maxIter^2) time complexity for every case. Since I use Arrays, I am forced to have a best case of O(maxIter^2). This is because we check the array
+ * elements even when they are null. This is rather inefficient, but it doesn't affect the gameplay at this point. Although scalability and performance can be a concern.
+ *
+ * (Ways to improve efficiency)
+ * Future updates of this game will include options to increase efficiency such as:
+ * 1. Using linkedLists rather than arrays (This is because we won't have null elements that your pc wastes time looking for.
+ * 2. Linear searching of enemies rather than Exponential searching. This means that the blast will only look for one enemy at a time starting at the enemy with the highest Y value.
+ * after it goes past the previous enemy value it searches for the next one. This will keep a linear operation of O(maxIter) The drawback to this approach is it make it
+ * impossible for multiple enemies to share x values.
+ * */
