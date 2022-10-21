@@ -20,8 +20,8 @@ import java.util.Random;
  *
  * (Time complexity)
  * The blasts[], and enemies[] both have a length of (maxIter). Each blast compares its position to every single enemy each frame, thus providing an
- * O(maxIter^2) time complexity for every case. Since we use Arrays, we are forced to have a best case of O(maxIter^2). This is because we check the array
- * elements even when they are null. This is rather inefficient but it doesn't affect the gameplay at this point. Although scalability and performance can be a concern.
+ * O(maxIter^2) time complexity for every case. Since I use Arrays, I am forced to have a best case of O(maxIter^2). This is because we check the array
+ * elements even when they are null. This is rather inefficient, but it doesn't affect the gameplay at this point. Although scalability and performance can be a concern.
  *
  * (Ways to improve efficiency)
  * Future updates of this game will include options to increase efficiency such as:
@@ -33,6 +33,7 @@ import java.util.Random;
 public class BlankLevel extends Level {
 
     BufferedImage playerIcon = ImageIO.read(new File("Level1/shooter 1.png"));
+    //int tileSize = 16;
 
 
     public BlankLevel() throws IOException {
@@ -79,7 +80,7 @@ public class BlankLevel extends Level {
         if(keyHandler.space){
             spacePressed=true;
             blastY[keyHandler.blastCount] = playerY;
-            blastX[keyHandler.blastCount] = playerX;
+            blastX[keyHandler.blastCount] = playerX+(tileSize/2);
             keyHandler.blastCount++;
             keyHandler.space = false;
         }
@@ -114,7 +115,7 @@ public class BlankLevel extends Level {
             //Spawns enemy collision
             if(iterator % spawnDelay == 0){
                 if(i==0){
-                    enemyX[spawnIterator] = random.nextInt((width-tileSize)-tileSize) + tileSize;
+                    enemyX[spawnIterator] = random.nextInt((width-tileSize) + tileSize);
                     enemyY[spawnIterator] = 12;
                     spawnIterator++;
                 }
@@ -132,7 +133,7 @@ public class BlankLevel extends Level {
             if(spacePressed){
                 if(i<15) {
                     if (blasts[i] != null && blastX[i]!=null && blastY[i]!=null) {
-                        blasts[i].fillRect(blastX[i] + 15, blastY[i] - 9, 4, 5);
+                        blasts[i].fillRect(blastX[i], blastY[i] - 9, 4, 5);
                         if(blastY[i] >0)blastY[i] -= 1;
                     }
                 }
@@ -140,7 +141,7 @@ public class BlankLevel extends Level {
             //Search if blasts and enemies collide
             for(int j=0; j<15; j++) {
                 if(blastY[i] != null && blastX[i]!=null && enemyY[j]!=null && enemyX[j]!=null) {
-                    if (blastY[i] >= 0 && blastY[i] - 9 <= enemyY[j] + tileSize && blastX[i] >= enemyX[j] - ((tileSize/2))  && blastX[i] <= enemyX[j] + (tileSize/2)) {
+                    if (blastY[i] >= 0 && blastY[i] - 9 <= enemyY[j] + tileSize && blastX[i] >= enemyX[j] && blastX[i] <= enemyX[j] + tileSize) {
                         if (blastY[i] != 0) {
                             blasts[i] = null;
                             isShot[j] = true;

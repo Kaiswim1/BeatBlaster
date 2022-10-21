@@ -6,7 +6,7 @@ import java.io.File;
 import java.util.Random;
 
 public abstract class Level extends JPanel implements Runnable {
-    final int tileSize = 32;
+    int tileSize = 32;
     final int width = (tileSize * 12)*2;
 
     int scoreTracker=0; //The same value use to track the score will be used to track time through the game
