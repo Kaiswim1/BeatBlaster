@@ -15,7 +15,7 @@ import java.util.Random;
  * How this game handles collision detection:
  * With graphics that require collision detection, they also contain arrays of every x and y coordinate of the corresponding graphics. I.e.
  * enemies have the corresponding enemyX[] and enemy[] to keep track of their position.
- * Therefore in order to detect that you shot an enemy, the game compares every blastX[] and blastY[] element with every enemyX[] and enemyY[] every frame
+ * In order to detect that you shot an enemy, the game compares every blastX[] and blastY[] element with every enemyX[] and enemyY[] every frame
  * and checks if any blast has collided with any enemy.
  *
  * (Time complexity)
@@ -37,7 +37,7 @@ public class BlankLevel extends Level {
 
     public BlankLevel() throws IOException {
         this.setPreferredSize(new Dimension(width, height));
-        this.setDoubleBuffered(true);
+        //this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
         gameThread = new Thread(this);
@@ -102,7 +102,7 @@ public class BlankLevel extends Level {
         g2.drawImage(playerIcon, playerX, playerY, null);
 
         for(int i=0; i<maxIter; i++) {//Because enemies.length is the largest iteration
-            if(enemyY[i] != null && enemyX[i]!=null && enemyY[i] >= groundVal - 32){ //If an enemy reaches below the ground, stop the gameThread.
+            if(enemyY[i] != null && enemyY[i] >= groundVal - 32){ //If an enemy reaches below the ground, stop the gameThread.
                 gameThread = null;
                 return;
             }
@@ -121,14 +121,11 @@ public class BlankLevel extends Level {
             }
             //Draws the enemies onto the game
             else{
-                if (enemies[i] != null && isShot[i] == false) {
-                    if(enemyX[i]!=null && enemyY[i]!=null) {
+                if(enemyX[i]!=null && enemyY[i]!=null) {
+                    if (enemies[i] != null && isShot[i] == false) {
                         enemies[i].drawRect( enemyX[i], enemyY[i], tileSize, tileSize);
                     }
-                }
-                //Makes the enemies scroll downward
-                if(iterator%enemySpeed == 0 && enemyY[i]!=null){
-                    enemyY[i] += 1;
+                    if(iterator%enemySpeed == 0) enemyY[i]+=1;
                 }
             }
             //Spawns player shot and makes it scroll upward
@@ -163,8 +160,6 @@ public class BlankLevel extends Level {
             keyHandler.blastCount = 0;
         }
         if(spawnIterator >= maxIter) spawnIterator = 0;
-
-
         g2.dispose();
     }
 }
